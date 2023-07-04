@@ -1,0 +1,61 @@
+.Desc-Container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  background-color: #202c33;
+}
+
+.photo-name-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.photo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.photo img {
+  width: 85%;
+  height: 70%;
+  border-radius: 50%;
+}
+
+.others {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icon {
+  color: #aebac1;
+  font-size: 18px;
+}
+
+.Desc-Name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+  align-items: baseline;
+}
+
+.com {
+  color: white;
+  margin: 5px;
+}
+
+.last-seen {
+  font-size: 10px;
+}
+
+.desc-others {
+  display: flex;
+  width: 10%;
+  justify-content: space-around;
+  align-items: center;
+}

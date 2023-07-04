@@ -1,0 +1,31 @@
+.Profile-Container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  background-color: #202c33;
+}
+
+.photo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.photo img {
+  width: 85%;
+  height: 70%;
+  border-radius: 50%;
+}
+
+.others {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icon {
+  color: #aebac1;
+  font-size: 18px;
+}
