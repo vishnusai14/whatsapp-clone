@@ -1,16 +1,14 @@
 import React from "react";
-import "./ListNames.css";
-import Name from "./Name/Name";
+import Searchbar from "../Shared/Searchbar/Searchbar";
+import Name from "../ListNames/Name/Name";
 import photo from "../../Assets/profile.jpg";
 import photo1 from "../../Assets/profile1.jpg";
 import photo2 from "../../Assets/profile2.jpg";
 import photo3 from "../../Assets/profile3.jpg";
 import photo4 from "../../Assets/profile4.jpg";
-import ProfileDesc from "../ProfileDesc/ProfielDesc";
-import Community from "../Community/Community";
-import NewChat from "../NewChat/NewChat";
-import Searchbar from "../Shared/Searchbar/Searchbar";
-class ListNames extends React.Component {
+import "./NewChat.css";
+
+class NewChat extends React.Component {
   state = {
     text: "",
     isSearching: false,
@@ -84,6 +82,8 @@ class ListNames extends React.Component {
       { name: "Gregory Stein", photo: photo3, selected: false, id: 29 },
       { name: "Gayathri Prasanna", photo: photo4, selected: false, id: 30 },
     ],
+
+    nameWithSorted: {},
   };
 
   search = (e) => {
@@ -94,81 +94,152 @@ class ListNames extends React.Component {
     displayNames = names.filter((e) => {
       return e.name.toLowerCase().includes(text);
     });
+
+    let sortedName = {};
+    displayNames.forEach((name) => {
+      console.log(name.name[0]);
+      console.log(sortedName.hasOwnProperty(name.name[0].toUpperCase()));
+      if (sortedName.hasOwnProperty(name.name[0].toUpperCase())) {
+        let existName = sortedName[name.name[0].toUpperCase()];
+        let newName = [...existName, name];
+        sortedName[name.name[0].toUpperCase()] = newName;
+      } else {
+        sortedName[name.name[0].toUpperCase()] = [name];
+      }
+      console.log(sortedName);
+    });
+
+    let sortedAlphabets = Object.keys(sortedName)
+      .sort()
+      .reduce((objEntries, key) => {
+        objEntries[key] = sortedName[key];
+        return objEntries;
+      }, {});
+    console.log(sortedAlphabets);
+
     this.setState((prevState) => ({
       ...prevState,
       displayNames: displayNames,
+      nameWithSorted: sortedAlphabets,
       text: text,
     }));
   };
-  changeSelected = (id, updateDesc) => {
+  componentDidMount = () => {
+    let sortedName = {};
+    this.state.displayNames.forEach((name) => {
+      console.log(name.name[0]);
+      console.log(sortedName.hasOwnProperty(name.name[0].toUpperCase()));
+      if (sortedName.hasOwnProperty(name.name[0].toUpperCase())) {
+        let existName = sortedName[name.name[0].toUpperCase()];
+        let newName = [...existName, name];
+        sortedName[name.name[0].toUpperCase()] = newName;
+      } else {
+        sortedName[name.name[0].toUpperCase()] = [name];
+      }
+      console.log(sortedName);
+    });
+
+    let sortedAlphabets = Object.keys(sortedName)
+      .sort()
+      .reduce((objEntries, key) => {
+        objEntries[key] = sortedName[key];
+        return objEntries;
+      }, {});
+    console.log(sortedAlphabets);
     this.setState((prevState) => ({
       ...prevState,
-      selectedId: id,
+      nameWithSorted: sortedAlphabets,
     }));
-    updateDesc(
-      this.state.names.filter((e) => {
-        return e.id === id;
-      })
-    );
-  };
-
-  closeScreen = (screen) => {
-    this.props.closeScreen(screen);
   };
 
   render() {
-    console.log(this.state.isSearching);
     return (
-      <div className="whole-container">
-        <div
-          style={{ display: this.props.shownewchat ? "none" : "flex" }}
-          className="ListNames-Container"
-        >
-          <div className="Searchbar-Container">
-            <Searchbar id="bar1" i1="SI1" i2="AI1" search={this.search} />
-            <div className="filter icon">
-              <i className="fa-solid fa-sort"></i>
-            </div>
+      <div
+        className={`Profile-Desc-Container ${
+          this.props.shownewchat ? "container2-animate" : "container2-deanimate"
+        }`}
+      >
+        <div className="heading">
+          <div
+            onClick={this.props.closeScreen}
+            className="heading-icon pointer"
+          >
+            <i className="fa-solid fa-arrow-left"></i>
           </div>
-          <div className="Name-Container">
-            {this.state.displayNames.map((e) => {
-              return (
-                <Name
-                  text={this.state.text}
-                  key={e.name}
-                  name={e.name}
-                  photo={e.photo}
-                  selectedId={this.state.selectedId}
-                  id={e.id}
-                  changeSelected={(id) => {
-                    this.changeSelected(id, this.props.updateDesc);
-                  }}
-                />
-              );
-            })}
+          <div className="heading-name">
+            <span>New Chat</span>
           </div>
         </div>
-        <ProfileDesc
-          closeScreen={() => {
-            this.closeScreen("profileDesc");
+        <div
+          style={{
+            alignItems: "flex-start",
+            marginTop: "0px",
+            width: "100%",
+            height: "auto",
           }}
-          showProfileDesc={this.props.showProfileDesc}
-        />
-        <Community
-          closeScreen={() => {
-            this.closeScreen("community");
-          }}
-          showcommunity={this.props.showcommunity}
-        />
-        <NewChat
-          closeScreen={() => {
-            this.closeScreen("newchat");
-          }}
-          shownewchat={this.props.shownewchat}
-        />
+          className="profile-photo"
+        >
+          <div className="Searchbar-Container" style={{ width: "100%" }}>
+            <Searchbar search={this.search} id="bar2" i1="SI2" i2="AI2" />
+          </div>
+        </div>
+        <div
+          style={{ marginTop: "0px", overflow: "scroll" }}
+          className={`content ${
+            this.props.shownewchat ? "content-animation" : "content-deanimation"
+          }`}
+        >
+          <div>
+            {Object.keys(this.state.nameWithSorted).map((key) => {
+              return (
+                //Key should be unique
+                <React.Fragment key={key}>
+                  <div
+                    style={{ display: "flex", margin: "10px", color: "green" }}
+                  >
+                    {key}
+                  </div>
+                  {this.state.nameWithSorted[key].map((e) => {
+                    return (
+                      <Name
+                        text={this.state.text}
+                        key={e.name}
+                        name={e.name}
+                        photo={e.photo}
+                        selectedId={this.state.selectedId}
+                        id={e.id}
+                        changeSelected={(id) => {
+                          this.changeSelected(id, this.props.updateDesc);
+                        }}
+                      />
+                    );
+                  })}
+                </React.Fragment>
+              );
+            })}
+            {/* {this.state.displayNames.map((e) => {
+              return (
+                <>
+                  <div>A</div>
+                  <Name
+                    text={this.state.text}
+                    key={e.name}
+                    name={e.name}
+                    photo={e.photo}
+                    selectedId={this.state.selectedId}
+                    id={e.id}
+                    changeSelected={(id) => {
+                      this.changeSelected(id, this.props.updateDesc);
+                    }}
+                  />
+                </>
+              );
+            })} */}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default ListNames;
+export default NewChat;

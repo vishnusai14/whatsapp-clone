@@ -38,6 +38,10 @@ body {
   overflow-y: scroll;
 }
 
+.no-scroll {
+  overflow: hidden !important;
+}
+
 @media screen and (max-width: 1000px) {
   .grid {
     grid-template-columns: 35% 65%;

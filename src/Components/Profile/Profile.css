@@ -4,6 +4,7 @@
   height: 100%;
   justify-content: space-between;
   background-color: #202c33;
+  position: absolute;
 }
 
 .photo {
@@ -28,4 +29,73 @@
 .icon {
   color: #aebac1;
   font-size: 18px;
+}
+
+.container2 {
+  position: absolute;
+  transform: translateX(-500px);
+  content-visibility: hidden;
+}
+
+.container2-animate {
+  animation-name: animate-container2;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.container2-deanimate {
+  animation-name: deanimate-container2;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animate-container2 {
+  0% {
+    transform: translateX(-500px);
+  }
+  20% {
+    transform: translateX(-428px);
+  }
+  40% {
+    transform: translateX(-357px);
+  }
+  50% {
+    transform: translateX(-286px);
+  }
+  60% {
+    transform: translateX(-215px);
+  }
+  80% {
+    transform: translateX(-114px);
+  }
+  85% {
+    transform: translateX(-71px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes deanimate-container2 {
+  0% {
+    transform: translateX(0px);
+  }
+  20% {
+    transform: translateX(-71px);
+  }
+  40% {
+    transform: translateX(-114px);
+  }
+  50% {
+    transform: translateX(-215px);
+  }
+  60% {
+    transform: translateX(-286px);
+  }
+  80% {
+    transform: translateX(-357px);
+  }
+  100% {
+    transform: translateX(-500px);
+  }
 }

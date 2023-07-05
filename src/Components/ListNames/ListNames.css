@@ -2,6 +2,12 @@
   display: flex;
   background: #111b21;
   flex-direction: column;
+  position: absolute;
+}
+
+.whole-container {
+  position: relative;
+  height: 103%;
 }
 
 .Searchbar-Container {
@@ -32,7 +38,7 @@
   color: white;
 }
 
-.search {
+.searchInput {
   font-size: 14px !important;
 }
 
@@ -52,22 +58,22 @@
   animation-fill-mode: forwards;
 }
 
-#searchIcon {
+.searchIcon {
   position: absolute;
   opacity: 1;
 }
-#arrowIcon {
+.arrowIcon {
   transform: rotate(-70deg);
   opacity: 0;
 }
 .animate-arrow {
   animation-name: anim2;
-  animation-duration: 0.3s;
+  animation-duration: 0.2s;
   animation-fill-mode: forwards;
 }
 .deanimate-arrow {
   animation-name: deanim2;
-  animation-duration: 0.3s;
+  animation-duration: 0.2s;
   animation-fill-mode: forwards;
 }
 
